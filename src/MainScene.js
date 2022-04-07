@@ -1,5 +1,8 @@
 import Phaser from "phaser";
 import Player from "./Player";
+import tilesetUrl from './assets/tileset.png';
+import fullscreenUrl from './assets/ui/fullscreen.png';
+import map from './assets/map.json';
 
 export default class MainScene extends Phaser.Scene {
 
@@ -9,16 +12,16 @@ export default class MainScene extends Phaser.Scene {
 
     preload() {
         Player.load(this)
-        this.load.image('tiles', 'assets/tileset.png')
-        this.load.tilemapTiledJSON('map', 'assets/map.json')
-        this.load.spritesheet('fullscreen', 'assets/ui/fullscreen.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.image('tiles', tilesetUrl)
+        this.load.tilemapTiledJSON('map', map)
+        this.load.spritesheet('fullscreen', fullscreenUrl, { frameWidth: 64, frameHeight: 64 });
     }
 
     create() {
-        const map = this.make.tilemap({key: 'map'})
-        const tileset = map.addTilesetImage('tileset', 'tiles', 32, 32, 0, 0);
-        const ground = map.createLayer('ground', tileset, 0, 0);
-        const dirt = map.createLayer('dirt', tileset, 0, 0);
+        const tilemap = this.make.tilemap({key: 'map'})
+        const tileset = tilemap.addTilesetImage('tileset', 'tiles', 32, 32, 0, 0);
+        const ground = tilemap.createLayer('ground', tileset, 0, 0);
+        const dirt = tilemap.createLayer('dirt', tileset, 0, 0);
 
         ground.setCollisionByProperty({collides: true})
         this.matter.world.convertTilemapLayer(ground)

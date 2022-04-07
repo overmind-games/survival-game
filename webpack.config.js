@@ -10,6 +10,9 @@ module.exports = { //TODO config for prod
         clean: true,
     },
     devtool: 'inline-source-map',
+    devServer: {
+        static: './dist',
+    },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Survival Game',
@@ -20,6 +23,10 @@ module.exports = { //TODO config for prod
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
             },
         ],
     },
