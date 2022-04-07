@@ -1,11 +1,16 @@
 {
   "name": "survival",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
   "license": "MIT",
-  "source": "src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
   "devDependencies": {
-    "buffer": "^6.0.3"
+    "buffer": "^6.0.3",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "phaser": "^3.55.2",
