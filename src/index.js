@@ -7,7 +7,6 @@ const config = {
     height: 510,
     backgroundColor: '#333333',
     type: Phaser.AUTO,
-    parent: 'survival-game',
     scene: [MainScene],
     scale: {
         mode: Phaser.Scale.FIT,
