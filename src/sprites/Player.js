@@ -1,7 +1,7 @@
 import Phaser from "phaser";
-import mageUrl from './assets/mage.png';
-import mageAtlas from './assets/mage_atlas.json';
-import mageAnim from './assets/mage_anim.json';
+import mageUrl from '../assets/mage.png';
+import mageAtlas from '../assets/mage_atlas.json';
+import mageAnim from '../assets/mage_anim.json';
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
 

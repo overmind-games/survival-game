@@ -1,8 +1,9 @@
 import Phaser from "phaser";
-import Player from "./Player";
-import tilesetUrl from './assets/tileset.png';
-import fullscreenUrl from './assets/ui/fullscreen.png';
-import map from './assets/map.json';
+import Player from "../sprites/Player";
+import Resource from "../sprites/Resource";
+import tilesetUrl from '../assets/map/tileset.png';
+import fullscreenUrl from '../assets/ui/fullscreen.png';
+import Map from "../map/Map";
 
 export default class MainScene extends Phaser.Scene {
 
@@ -12,25 +13,22 @@ export default class MainScene extends Phaser.Scene {
 
     preload() {
         Player.load(this)
+        Resource.load(this)
         this.load.image('tiles', tilesetUrl)
-        this.load.tilemapTiledJSON('map', map)
         this.load.spritesheet('fullscreen', fullscreenUrl, { frameWidth: 64, frameHeight: 64 });
     }
 
     create() {
-        const tilemap = this.make.tilemap({key: 'map'})
-        const tileset = tilemap.addTilesetImage('tileset', 'tiles', 32, 32, 0, 0);
-        const ground = tilemap.createLayer('ground', tileset, 0, 0);
-        const dirt = tilemap.createLayer('dirt', tileset, 0, 0);
+        const map = new Map(this);
 
-        ground.setCollisionByProperty({collides: true})
-        this.matter.world.convertTilemapLayer(ground)
+        map.resources.forEach(resourceObject => new Resource(this, resourceObject));
 
         this.player = new Player({
             scene: this,
-            x: 100,
-            y: 100
+            x: map.spawn.x,
+            y: map.spawn.y
         })
+
         this.player.inputKeys = this.input.keyboard.addKeys({
             up: 'W',
             down: 'S',

@@ -1,20 +1,22 @@
 import Phaser from 'phaser'
 import PhaserMatterCollisionPlugin from 'phaser-matter-collision-plugin'
-import MainScene from "./MainScene";
+import MainScene from "./scenes/MainScene";
 
 const config = {
-    width: 510,
-    height: 510,
+    width: 512,
+    height: 512,
     backgroundColor: '#333333',
     type: Phaser.AUTO,
     scene: [MainScene],
     scale: {
         mode: Phaser.Scale.FIT,
-        parent: 'phaser-example',
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: 512,
         height: 512,
         zoom: 2
+    },
+    render: {
+        pixelArt: true
     },
     physics: {
         default: 'matter',

@@ -1,5 +1,5 @@
 {
-  "name": "survival",
+  "name": "survival-game",
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "phaser": "^3.55.2",
-    "phaser-matter-collision-plugin": "^1.0.0"
+    "phaser-matter-collision-plugin": "^1.0.0",
+    "underscore": "^1.13.2"
   }
 }

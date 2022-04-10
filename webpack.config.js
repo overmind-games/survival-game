@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = { //TODO config for prod
     mode: 'development',
-    entry: './src/SurvivalGame.js',
+    entry: './src/Game.js',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
