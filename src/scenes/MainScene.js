@@ -21,12 +21,20 @@ export default class MainScene extends Phaser.Scene {
     create() {
         const map = new Map(this);
 
-        map.resources.forEach(resourceObject => new Resource(this, resourceObject));
+        this.resources = map.resources.map(resourceObject => new Resource(this, resourceObject));
 
         this.player = new Player({
             scene: this,
             x: map.spawn.x,
             y: map.spawn.y
+        })
+
+        this.storeEntering = this.add.zone(map.store.x, map.store.y, map.store.width, map.store.height)
+
+        this.matterCollision.addOnCollideActive({
+            objectA: this.player,
+            objectB: this.storeEntering,
+            callback: () => console.log('start')
         })
 
         this.player.inputKeys = this.input.keyboard.addKeys({
@@ -58,9 +66,32 @@ export default class MainScene extends Phaser.Scene {
                 this.scale.startFullscreen();
             }
         }, this);
+
+        window.scene = this;
+
+        this.matter.world.drawDebug = false;
+        this.toggleDebug = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
     }
 
     update(time, delta) {
         this.player.update()
+
+        // this.children.sort('y', (first, second) => { //TODO remove
+        //     return first.y > second.y;
+        // })
+
+        // if (this.matter.overlap(this.player, this.storeEntering)) {
+        //     console.log('Enter');
+        // }
+
+        if (Phaser.Input.Keyboard.JustDown(this.toggleDebug)) {
+            if (this.matter.world.drawDebug) {
+                this.matter.world.drawDebug = false;
+                this.matter.world.debugGraphic.clear();
+            }
+            else {
+                this.matter.world.drawDebug = true;
+            }
+        }
     }
 }

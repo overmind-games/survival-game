@@ -2,12 +2,17 @@ import Phaser from "phaser";
 import mageUrl from '../assets/mage.png';
 import mageAtlas from '../assets/mage_atlas.json';
 import mageAnim from '../assets/mage_anim.json';
+import itemsUrl from '../assets/items.png';
 
 export default class Player extends Phaser.Physics.Matter.Sprite {
 
     static load(scene) {
         scene.load.atlas('mage', mageUrl, mageAtlas)
         scene.load.animation('mage_anim', mageAnim)
+        scene.load.spritesheet('items', itemsUrl, {
+            frameWidth: 32,
+            frameHeight: 32,
+        })
     }
 
     constructor({scene, x, y}) {
@@ -35,6 +40,10 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         this.setExistingBody(body)
         this.setFixedRotation()
+
+        this.tool = scene.add.sprite(100, 100, 'items', 161)
+            .setScale(0.7)
+            .setOrigin(0.25, 0.75)
     }
 
     update(args) {
@@ -64,5 +73,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         } else {
             this.anims.play('mage_idle', true)
         }
+
+        this.tool.setPosition(this.x, this.y)
     }
 }
