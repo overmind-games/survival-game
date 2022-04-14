@@ -11,12 +11,15 @@ export default class FullscreenToggle extends Phaser.GameObjects.Image {
 
         this.setOrigin(1, 0)
         this.setScale(0.5, 0.5)
+        this.setDepth(50000)
         this.setInteractive()
 
         const FKey = scene.input.keyboard.addKey('F');
 
         this.on('pointerup', this.toggleFullScreen, this);
         FKey.on('down', this.toggleFullScreen, this);
+
+        this.scene.add.existing(this);
     }
 
     toggleFullScreen() {
