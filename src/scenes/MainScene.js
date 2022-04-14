@@ -44,31 +44,25 @@ export default class MainScene extends Phaser.Scene {
             right: 'D'
         })
 
-        const button = this.add.image(512 - 16, 16, 'fullscreen', 0).setOrigin(1, 0).setScale(0.5, 0.5).setInteractive()
-        button.on('pointerup', function () {
-            if (this.scale.isFullscreen) {
-                button.setFrame(0);
-                this.scale.stopFullscreen();
-            } else {
-                button.setFrame(1);
-                this.scale.startFullscreen();
-            }
-        }, this);
+        this.button = this.add.image(512 - 16, 16, 'fullscreen', 0).setOrigin(1, 0).setScale(0.5, 0.5).setInteractive()
 
         const FKey = this.input.keyboard.addKey('F');
 
-        FKey.on('down', function () { //TODO extract to function
-            if (this.scale.isFullscreen) {
-                button.setFrame(0);
-                this.scale.stopFullscreen();
-            } else {
-                button.setFrame(1);
-                this.scale.startFullscreen();
-            }
-        }, this);
+        this.button.on('pointerup', this.toggleFullScreen, this);
+        FKey.on('down', this.toggleFullScreen, this);
 
         this.matter.world.drawDebug = false;
         this.toggleDebug = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
+    }
+
+    toggleFullScreen() {
+        if (this.scale.isFullscreen) {
+            this.button.setFrame(0);
+            this.scale.stopFullscreen();
+        } else {
+            this.button.setFrame(1);
+            this.scale.startFullscreen();
+        }
     }
 
     update(time, delta) {
