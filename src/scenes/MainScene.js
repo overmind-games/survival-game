@@ -57,7 +57,7 @@ export default class MainScene extends Phaser.Scene {
 
         const FKey = this.input.keyboard.addKey('F');
 
-        FKey.on('down', function () {
+        FKey.on('down', function () { //TODO extract to function
             if (this.scale.isFullscreen) {
                 button.setFrame(0);
                 this.scale.stopFullscreen();
@@ -67,22 +67,12 @@ export default class MainScene extends Phaser.Scene {
             }
         }, this);
 
-        window.scene = this;
-
         this.matter.world.drawDebug = false;
         this.toggleDebug = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
     }
 
     update(time, delta) {
         this.player.update()
-
-        // this.children.sort('y', (first, second) => { //TODO remove
-        //     return first.y > second.y;
-        // })
-
-        // if (this.matter.overlap(this.player, this.storeEntering)) {
-        //     console.log('Enter');
-        // }
 
         if (Phaser.Input.Keyboard.JustDown(this.toggleDebug)) {
             if (this.matter.world.drawDebug) {

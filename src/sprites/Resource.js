@@ -28,6 +28,7 @@ export default class Resource extends Phaser.Physics.Matter.Sprite {
         this.setExistingBody(collider);
         this.setOrigin(xOrigin, yOrigin)
         this.setStatic(true);
+        this.setDepth(this.y)
 
         this.scene.add.existing(this);
     }

@@ -67,6 +67,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         velocity.setLength(this.speed)
         this.setVelocity(velocity.x, velocity.y)
+        this.setDepth(this.y)
 
         if (this.body.speed > 0) {
             this.anims.play('mage_walk', true)
@@ -75,5 +76,6 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         }
 
         this.tool.setPosition(this.x, this.y)
+        this.tool.setDepth(this.y)
     }
 }

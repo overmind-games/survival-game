@@ -7,16 +7,23 @@ export default class Map extends Phaser.Tilemaps.Tilemap {
         const mapData = Phaser.Tilemaps.Parsers.Tiled.ParseJSONTiled("tilemap", mapJson, true);
         super(scene, mapData)
 
-        this.tileset = this.addTilesetImage('tileset', 'tiles', 32, 32, 0, 0); //TODO try convert to getters
+        this.tileset = this.addTilesetImage('tileset', 'tiles', 32, 32, 0, 0);
 
-        this.ground = this.createLayer('ground', this.tileset, 0, 0)
-            .setCollisionByProperty({collides: true});
-        this.dirt = this.createLayer('dirt', this.tileset, 0, 0);
-        this.buildings = this.createLayer('buildings', this.tileset, 0, 0)
-            .setCollisionByProperty({collides: true});
+        this.belowLayer = this.createLayer('below', this.tileset, 0, 0)
+            .setCollisionByProperty({collides: true})
+            .setDepth(-10);
+        this.belowAdditionsLayer = this.createLayer('below-additions', this.tileset, 0, 0)
+            .setDepth(-9);
+        this.worldLayer = this.createLayer('world', this.tileset, 0, 0)
+            .setCollisionByProperty({collides: true})
+            .setDepth(-5);
+        this.aboveLayer = this.createLayer('above', this.tileset, 0, 0)
+            .setDepth(20000);
 
-        scene.matter.world.convertTilemapLayer(this.ground);
-        scene.matter.world.convertTilemapLayer(this.buildings);
+        scene.matter.world.convertTilemapLayer(this.belowLayer);
+        scene.matter.world.convertTilemapLayer(this.worldLayer);
+
+        window.layers = this.layers;
     }
 
     get spawn() {
