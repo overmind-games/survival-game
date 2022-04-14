@@ -2,8 +2,8 @@ import Phaser from "phaser";
 import Player from "../sprites/Player";
 import Resource from "../sprites/Resource";
 import tilesetUrl from '../assets/map/tileset.png';
-import fullscreenUrl from '../assets/ui/fullscreen.png';
 import Map from "../map/Map";
+import FullscreenToggle from "../ui/FullscreenToggle";
 
 export default class MainScene extends Phaser.Scene {
 
@@ -14,8 +14,8 @@ export default class MainScene extends Phaser.Scene {
     preload() {
         Player.load(this)
         Resource.load(this)
+        FullscreenToggle.load(this)
         this.load.image('tiles', tilesetUrl)
-        this.load.spritesheet('fullscreen', fullscreenUrl, { frameWidth: 64, frameHeight: 64 });
     }
 
     create() {
@@ -44,25 +44,10 @@ export default class MainScene extends Phaser.Scene {
             right: 'D'
         })
 
-        this.button = this.add.image(512 - 16, 16, 'fullscreen', 0).setOrigin(1, 0).setScale(0.5, 0.5).setInteractive()
-
-        const FKey = this.input.keyboard.addKey('F');
-
-        this.button.on('pointerup', this.toggleFullScreen, this);
-        FKey.on('down', this.toggleFullScreen, this);
+        new FullscreenToggle(this);
 
         this.matter.world.drawDebug = false;
         this.toggleDebug = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
-    }
-
-    toggleFullScreen() {
-        if (this.scale.isFullscreen) {
-            this.button.setFrame(0);
-            this.scale.stopFullscreen();
-        } else {
-            this.button.setFrame(1);
-            this.scale.startFullscreen();
-        }
     }
 
     update(time, delta) {
