@@ -1,13 +1,14 @@
 import Phaser from 'phaser'
 import PhaserMatterCollisionPlugin from 'phaser-matter-collision-plugin'
 import MainScene from "./scenes/MainScene";
+import StoreScene from "./scenes/StoreScene";
 
 const config = {
     width: 512,
     height: 512,
     backgroundColor: '#333333',
     type: Phaser.AUTO,
-    scene: [MainScene],
+    scene: [MainScene, StoreScene],
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,

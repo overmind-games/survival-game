@@ -1,24 +1,42 @@
-import Phaser from "phaser";
 import Player from "../sprites/Player";
 import Resource from "../sprites/Resource";
-import tilesetUrl from '../assets/map/tileset.png';
 import Map from "../map/Map";
-import FullscreenToggle from "../ui/FullscreenToggle";
+import BaseScene from "./BaseScene";
+import Phaser from "phaser";
 
-export default class MainScene extends Phaser.Scene {
+export default class MainScene extends BaseScene {
 
     constructor() {
         super("MainScene")
     }
 
     preload() {
-        Player.load(this)
-        Resource.load(this)
-        FullscreenToggle.load(this)
-        this.load.image('tiles', tilesetUrl)
+        super.preload();
+        Map.load(this);
+        Player.load(this);
+        Resource.load(this);
     }
 
     create() {
+        super.create();
+
+        this.map = this.initialiseMap();
+
+        this.matterCollision.addOnCollideStart({
+            objectA: this.player,
+            objectB: this.storeEntering,
+            callback: () => this.goingToStore()
+        });
+
+        this.player.inputKeys = this.input.keyboard.addKeys({
+            up: 'W',
+            down: 'S',
+            left: 'A',
+            right: 'D'
+        });
+    }
+
+    initialiseMap() {
         const map = new Map(this);
 
         this.resources = map.resources.map(resourceObject => new Resource(this, resourceObject));
@@ -29,38 +47,64 @@ export default class MainScene extends Phaser.Scene {
             y: map.spawn.y
         })
 
-        this.storeEntering = this.add.zone(map.store.x, map.store.y, map.store.width, map.store.height)
+        this.storeEntering = this.matter.add.rectangle(
+            map.store.x + map.store.width / 2,
+            map.store.y + map.store.height / 2,
+            map.store.width,
+            map.store.height,
+            {
+                isSensor: true
+            }
+        )
 
-        this.matterCollision.addOnCollideActive({
+        return  map;
+    }
+
+    goingToStore() {
+        this.matterCollision.removeOnCollideStart({
+            objectA: this.player,
+            objectB: this.storeEntering
+        });
+
+        this.matterCollision.addOnCollideEnd({
             objectA: this.player,
             objectB: this.storeEntering,
-            callback: () => console.log('start')
+            callback: () => this.leavingShop()
+        });
+
+        this.player.showBalloon();
+        this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
+            .on('down', this.enterStore, this);
+    }
+
+    enterStore() {
+        this.cameras.main.fadeOut(700, 0, 0, 0)
+        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
+            this.time.delayedCall(1000, () => {
+                this.scene.start("StoreScene");
+            });
         })
+    }
 
-        this.player.inputKeys = this.input.keyboard.addKeys({
-            up: 'W',
-            down: 'S',
-            left: 'A',
-            right: 'D'
-        })
+    leavingShop() {
+        this.matterCollision.removeOnCollideEnd({
+            objectA: this.player,
+            objectB: this.storeEntering
+        });
 
-        new FullscreenToggle(this);
+        this.matterCollision.addOnCollideStart({
+            objectA: this.player,
+            objectB: this.storeEntering,
+            callback: () => this.goingToStore()
+        });
 
-        this.matter.world.drawDebug = false;
-        this.toggleDebug = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2);
+        this.player.hideBalloon();
+        this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     update(time, delta) {
-        this.player.update()
+        super.update();
 
-        if (Phaser.Input.Keyboard.JustDown(this.toggleDebug)) {
-            if (this.matter.world.drawDebug) {
-                this.matter.world.drawDebug = false;
-                this.matter.world.debugGraphic.clear();
-            }
-            else {
-                this.matter.world.drawDebug = true;
-            }
-        }
+        this.player.update()
     }
 }

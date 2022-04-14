@@ -480,7 +480,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -501,19 +501,19 @@
                  "y":224
                 }, 
                 {
-                 "height":71.4688606540304,
+                 "height":10.7477980354346,
                  "id":73,
                  "name":"store",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":66.9714642782754,
-                 "x":31.4015830035409,
+                 "width":14.5995477697365,
+                 "x":66.3161940092335,
                  "y":187
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],

@@ -11,6 +11,6 @@ export default class ResourceObject {
         this.width = width;
         this.height = height;
         this.type = type;
-        this.properties = _.object(_.map(properties, prop => [prop.name, prop.value]))
+        this.properties = _.object(_.map(properties, prop => [prop.name, prop.value]));
     }
 }

@@ -1,7 +1,12 @@
 import mapJson from '../assets/map/map.json';
 import ResourceObject from "./ResourceObject";
+import tilesetUrl from "../assets/map/tileset.png";
 
 export default class Map extends Phaser.Tilemaps.Tilemap {
+
+    static load(scene) {
+        scene.load.image('tiles', tilesetUrl)
+    }
 
     constructor(scene) {
         const mapData = Phaser.Tilemaps.Parsers.Tiled.ParseJSONTiled("tilemap", mapJson, true);
