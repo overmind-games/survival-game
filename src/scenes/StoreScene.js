@@ -4,7 +4,7 @@ import storeMapJson from "../assets/map/store.json";
 import ceilingTilesetUrl from "../assets/tiles/ceiling.png";
 import furnitureTilesetUrl from "../assets/tiles/furniture.png";
 import Player from "../sprites/Player";
-import Phaser from "phaser";
+import EnterRegion from "../behavior/EnterRegion";
 
 export default class StoreScene extends BaseScene {
 
@@ -74,66 +74,7 @@ export default class StoreScene extends BaseScene {
         this.cameras.main.centerOn(this.map.layer.widthInPixels / 2, this.map.layer.heightInPixels / 2);
         this.cameras.main.fadeIn(700, 0, 0, 0);
 
-        const exitRegion = this.map.getRegion('exit');
-        this.exit = this.matter.add.rectangle(
-            exitRegion.x + exitRegion.width / 2,
-            exitRegion.y + exitRegion.height / 2,
-            exitRegion.width,
-            exitRegion.height,
-            {
-                isSensor: true
-            }
-        );
-
-        this.matterCollision.addOnCollideStart({
-            objectA: this.player,
-            objectB: this.exit,
-            callback: () => this.goingToExit()
-        });
-    }
-
-    goingToExit() {
-        this.matterCollision.removeOnCollideStart({
-            objectA: this.player,
-            objectB: this.exit
-        });
-
-        this.matterCollision.addOnCollideEnd({
-            objectA: this.player,
-            objectB: this.exit,
-            callback: () => this.leaveExit()
-        });
-
-        this.player.showBalloon();
-        this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-            .on('down', this.exitStore, this);
-    }
-
-    exitStore() {
-        this.cameras.main.fadeOut(700, 0, 0, 0)
-        this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, (cam, effect) => {
-            this.time.delayedCall(1000, () => {
-                this.scene.start("MainScene", {
-                    spawnName: 'storeExit'
-                });
-            });
-        })
-    }
-
-    leaveExit() {
-        this.matterCollision.removeOnCollideEnd({
-            objectA: this.player,
-            objectB: this.exit
-        });
-
-        this.matterCollision.addOnCollideStart({
-            objectA: this.player,
-            objectB: this.exit,
-            callback: () => this.goingToExit()
-        });
-
-        this.player.hideBalloon();
-        this.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        new EnterRegion(this, this.map, this.player, 'exit','MainScene', 'storeExit');
     }
 
     update(time, delta) {
