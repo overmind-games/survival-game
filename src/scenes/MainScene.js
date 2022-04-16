@@ -3,6 +3,9 @@ import Resource from "../sprites/Resource";
 import Map from "../map/Map";
 import BaseScene from "./BaseScene";
 import Phaser from "phaser";
+import tilesetUrl from "../assets/map/tileset.png";
+import mapJson from '../assets/map/map.json';
+import ResourceObject from "../map/ResourceObject";
 
 export default class MainScene extends BaseScene {
 
@@ -12,52 +15,83 @@ export default class MainScene extends BaseScene {
 
     preload() {
         super.preload();
-        Map.load(this);
+        this.load.image('tiles', tilesetUrl);
         Player.load(this);
         Resource.load(this);
     }
 
-    create() {
+    create({spawnName = 'spawn'}) {
         super.create();
 
         this.map = this.initialiseMap();
+
+        const spawn = this.map.getRegion(spawnName);
+        this.player = new Player({
+            scene: this,
+            x: spawn.x + spawn.width / 2,
+            y: spawn.y + spawn.height / 2
+        })
 
         this.matterCollision.addOnCollideStart({
             objectA: this.player,
             objectB: this.storeEntering,
             callback: () => this.goingToStore()
         });
-
-        this.player.inputKeys = this.input.keyboard.addKeys({
-            up: 'W',
-            down: 'S',
-            left: 'A',
-            right: 'D'
-        });
     }
 
     initialiseMap() {
-        const map = new Map(this);
+        const layers = [
+            {
+                id: 'below',
+                depth: -10,
+                collides: true
+            },
+            {
+                id: 'below-additions',
+                depth: -9,
+                collides: false
+            },
+            {
+                id: 'world',
+                depth: -5,
+                collides: true
+            },
+            {
+                id: 'above',
+                depth: 20000,
+                collides: false
+            }
+        ];
 
-        this.resources = map.resources.map(resourceObject => new Resource(this, resourceObject));
-
-        this.player = new Player({
+        const map = new Map({
             scene: this,
-            x: map.spawn.x,
-            y: map.spawn.y
-        })
+            name: 'outdoor',
+            layers,
+            json: mapJson,
+            tileSets: [
+                {
+                    name: 'tileset',
+                    tileset: 'tiles'
+                }
+            ]
+        });
 
+        this.resources = map.getObjectLayer('resources').objects
+            .map(object => new ResourceObject(object))
+            .map(resourceObject => new Resource(this, resourceObject));
+
+        const store = map.getRegion('store');
         this.storeEntering = this.matter.add.rectangle(
-            map.store.x + map.store.width / 2,
-            map.store.y + map.store.height / 2,
-            map.store.width,
-            map.store.height,
+            store.x + store.width / 2,
+            store.y + store.height / 2,
+            store.width,
+            store.height,
             {
                 isSensor: true
             }
         )
 
-        return  map;
+        return map;
     }
 
     goingToStore() {

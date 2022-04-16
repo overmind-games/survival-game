@@ -510,6 +510,17 @@
                  "width":14.5995477697365,
                  "x":66.3161940092335,
                  "y":187
+                }, 
+                {
+                 "height":32,
+                 "id":75,
+                 "name":"storeExit",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":58,
+                 "y":187
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -518,7 +529,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":75,
+ "nextobjectid":76,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.4",

@@ -53,6 +53,13 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.balloon = scene.add.sprite(200, 200, 'balloons', 30)
             .setDepth(50000)
             .setVisible(false);
+
+        this.inputKeys = scene.input.keyboard.addKeys({
+            up: 'W',
+            down: 'S',
+            left: 'A',
+            right: 'D'
+        });
     }
 
     update(args) {
