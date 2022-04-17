@@ -21,30 +21,25 @@ export default class EnterRegion {
         );
 
         scene.matterCollision.addOnCollideStart({
-            objectA: this.player,
+            objectA: this.player.collider,
             objectB: this.exit,
             callback: () => this.comeToExit()
+        });
+
+        scene.matterCollision.addOnCollideEnd({
+            objectA: this.player.collider,
+            objectB: this.exit,
+            callback: () => this.leaveExit()
         });
     }
 
     comeToExit() {
-        this.scene.matterCollision.removeOnCollideStart({
-            objectA: this.player,
-            objectB: this.exit
-        });
-
-        this.scene.matterCollision.addOnCollideEnd({
-            objectA: this.player,
-            objectB: this.exit,
-            callback: () => this.leaveExit()
-        });
-
         this.player.showBalloon();
         this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-            .on('down', this.exitStore, this);
+            .on('down', this.onExit, this);
     }
 
-    exitStore() {
+    onExit() {
         this.scene.cameras.main.fadeOut(700, 0, 0, 0)
         this.scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
             this.scene.time.delayedCall(1000, () => {
@@ -56,17 +51,6 @@ export default class EnterRegion {
     }
 
     leaveExit() {
-        this.scene.matterCollision.removeOnCollideEnd({
-            objectA: this.player,
-            objectB: this.exit
-        });
-
-        this.scene.matterCollision.addOnCollideStart({
-            objectA: this.player,
-            objectB: this.exit,
-            callback: () => this.comeToExit()
-        });
-
         this.player.hideBalloon();
         this.scene.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }

@@ -28,18 +28,18 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
 
         const {Body, Bodies} = Phaser.Physics.Matter.Matter;
 
-        const playerCollider = Bodies.circle(this.x, this.y, 12, {
+        this.collider = Bodies.circle(this.x, this.y, 12, {
             isSensor: false,
             label: 'playerCollider'
         });
 
-        const playerSensor = Bodies.circle(this.x, this.y, 24, {
+        this.sensor = Bodies.circle(this.x, this.y, 24, {
             isSensor: true,
             label: 'playerSensor'
         });
 
         const body = Body.create({
-            parts: [playerCollider, playerSensor],
+            parts: [this.collider, this.sensor],
             friction: 0.35
         });
 

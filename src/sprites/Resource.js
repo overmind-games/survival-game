@@ -2,13 +2,19 @@ import Phaser from "phaser";
 import bushUrl from '../assets/map/resources/bush.png'
 import stoneUrl from '../assets/map/resources/stone.png'
 import treeUrl from '../assets/map/resources/tree.png'
+import bushSoundUrl from '../assets/audio/bush.mp3'
+import stoneSoundUrl from '../assets/audio/stone.mp3'
+import treeSoundUrl from '../assets/audio/tree.mp3'
 
 export default class Resource extends Phaser.Physics.Matter.Sprite {
 
     static load(scene) {
-        scene.load.image('bush', bushUrl)
-        scene.load.image('stone', stoneUrl)
-        scene.load.image('tree', treeUrl)
+        scene.load.image('bush', bushUrl);
+        scene.load.image('stone', stoneUrl);
+        scene.load.image('tree', treeUrl);
+        scene.load.audio('bush-sound', bushSoundUrl);
+        scene.load.audio('stone-sound', stoneSoundUrl);
+        scene.load.audio('tree-sound', treeSoundUrl);
     }
 
     constructor(scene, {type, x, y, width, height, properties}) {
@@ -30,7 +36,19 @@ export default class Resource extends Phaser.Physics.Matter.Sprite {
         this.setStatic(true);
         this.setDepth(this.y)
 
+        this.hitSound = this.scene.sound.add(`${type}-sound`);
+        this.health = 5;
+
         this.scene.add.existing(this);
+    }
+
+    hit() {
+        this.hitSound.play();
+        this.health--;
+
+        if (this.health === 0) {
+            this.destroy(true);
+        }
     }
 
     update(args) {

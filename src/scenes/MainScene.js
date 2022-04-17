@@ -6,6 +6,8 @@ import tilesetUrl from "../assets/map/tileset.png";
 import mapJson from '../assets/map/map.json';
 import ResourceObject from "../map/ResourceObject";
 import EnterRegion from "../behavior/EnterRegion";
+import Phaser from "phaser";
+import _ from "underscore";
 
 export default class MainScene extends BaseScene {
 
@@ -32,7 +34,23 @@ export default class MainScene extends BaseScene {
             y: spawn.y + spawn.height / 2
         })
 
-        new EnterRegion(this, this.map, this.player, 'store','StoreScene', 'spawn');
+        new EnterRegion(this, this.map, this.player, 'store', 'StoreScene', 'spawn');
+
+        this.touching = this.add.group();
+
+        this.matterCollision.addOnCollideStart({
+            objectA: this.player.sensor,
+            objectB: this.resources,
+            callback: event => this.touching.add(event.gameObjectB)
+        });
+
+        this.matterCollision.addOnCollideEnd({
+            objectA: this.player.sensor,
+            objectB: this.resources,
+            callback: event => this.touching.remove(event.gameObjectB)
+        });
+
+        this.actionKey =  this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE) //TODO Create action trait
     }
 
     initialiseMap() {
@@ -79,9 +97,22 @@ export default class MainScene extends BaseScene {
         return map;
     }
 
+    onAction() {
+        if (this.touching.countActive(true) === 0) {
+            return;
+        }
+
+        const closest = _.min(this.touching.children.entries, resource => Phaser.Math.Distance.BetweenPoints(this.player, resource));
+        closest.hit();
+    }
+
     update(time, delta) {
         super.update();
 
-        this.player.update()
+        this.player.update();
+
+        if (this.input.keyboard.checkDown(this.actionKey, 250)) {
+            this.onAction();
+        }
     }
 }
