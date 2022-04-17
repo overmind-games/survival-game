@@ -2,7 +2,6 @@ import Player from "../sprites/Player";
 import Resource from "../sprites/Resource";
 import Map from "../map/Map";
 import BaseScene from "./BaseScene";
-import Phaser from "phaser";
 import tilesetUrl from "../assets/map/tileset.png";
 import mapJson from '../assets/map/map.json';
 import ResourceObject from "../map/ResourceObject";
