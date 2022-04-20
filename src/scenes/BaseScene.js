@@ -18,12 +18,16 @@ export default class BaseScene extends Phaser.Scene {
         FullscreenToggle.load(this);
     }
 
-    create() {
+    create({fadeIn = false}) {
         new FullscreenToggle(this);
 
         this.matter.world.drawDebug = false;
         this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F2)
             .on('down', this.onPressDebugKey, this);
+
+        if (fadeIn) {
+            this.cameras.main.fadeIn(700, 0, 0, 0);
+        }
     }
 
     onPressDebugKey() {

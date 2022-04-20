@@ -25,7 +25,7 @@ export default class MainScene extends BaseScene {
     }
 
     create({spawnName = 'spawn'}) {
-        super.create();
+        super.create({});
 
         this.map = this.initialiseMap();
 

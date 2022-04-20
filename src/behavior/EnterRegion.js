@@ -40,14 +40,15 @@ export default class EnterRegion {
     }
 
     onExit() {
-        this.scene.cameras.main.fadeOut(700, 0, 0, 0)
+        this.scene.cameras.main.fadeOut(700, 0, 0, 0, )
         this.scene.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => {
             this.scene.time.delayedCall(1000, () => {
-                this.scene.scene.start(this.targetScene, {
-                    spawnName: this.targetSpawn
+                this.scene.scene.switch(this.targetScene, {
+                    spawnName: this.targetSpawn,
                 });
+                this.scene.cameras.main.fadeEffect.reset();
             });
-        })
+        });
     }
 
     leaveExit() {

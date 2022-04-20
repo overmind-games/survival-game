@@ -18,8 +18,8 @@ export default class StoreScene extends BaseScene {
         this.load.image('furnitureTiles', furnitureTilesetUrl);
     }
 
-    create() {
-        super.create();
+    create(params) {
+        super.create(params);
 
         const layers = [
             {
@@ -72,7 +72,6 @@ export default class StoreScene extends BaseScene {
         this.player.setFixedRotation();
 
         this.cameras.main.centerOn(this.map.layer.widthInPixels / 2, this.map.layer.heightInPixels / 2);
-        this.cameras.main.fadeIn(700, 0, 0, 0);
 
         new EnterRegion(this, this.map, this.player, 'exit','MainScene', 'storeExit');
     }
