@@ -8,7 +8,6 @@
          "encoding":"base64",
          "height":16,
          "id":1,
-         "locked":true,
          "name":"below",
          "opacity":1,
          "type":"tilelayer",
@@ -71,6 +70,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
                          "value":0.75
@@ -88,6 +92,11 @@
                  "id":43,
                  "name":"",
                  "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"stone\", \"count\":2}]"
+                        }, 
                         {
                          "name":"test",
                          "type":"float",
@@ -112,6 +121,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
                          "value":0.75
@@ -129,6 +143,11 @@
                  "id":46,
                  "name":"",
                  "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
                         {
                          "name":"yOrigin",
                          "type":"float",
@@ -148,6 +167,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
                          "value":0.8
@@ -165,6 +189,11 @@
                  "id":48,
                  "name":"",
                  "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
                         {
                          "name":"yOrigin",
                          "type":"float",
@@ -184,6 +213,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
                          "value":0.8
@@ -200,6 +234,12 @@
                  "height":32,
                  "id":50,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"berry\", \"count\":2}]"
+                        }],
                  "rotation":0,
                  "type":"bush",
                  "visible":true,
@@ -212,6 +252,12 @@
                  "height":32,
                  "id":52,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"berry\", \"count\":2}]"
+                        }],
                  "rotation":0,
                  "type":"bush",
                  "visible":true,
@@ -224,6 +270,12 @@
                  "height":32,
                  "id":53,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"berry\", \"count\":2}]"
+                        }],
                  "rotation":0,
                  "type":"bush",
                  "visible":true,
@@ -237,6 +289,11 @@
                  "id":54,
                  "name":"",
                  "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"stone\", \"count\":2}]"
+                        }, 
                         {
                          "name":"yOrigin",
                          "type":"float",
@@ -256,6 +313,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"stone\", \"count\":2}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
                          "value":0.6
@@ -273,6 +335,11 @@
                  "id":56,
                  "name":"",
                  "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"stone\", \"count\":2}]"
+                        }, 
                         {
                          "name":"yOrigin",
                          "type":"float",
@@ -292,6 +359,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"stone\", \"count\":2}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
                          "value":0.6
@@ -310,6 +382,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"stone\", \"count\":2}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
                          "value":0.6
@@ -326,20 +403,30 @@
                  "height":32,
                  "id":60,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"berry\", \"count\":2}]"
+                        }],
                  "rotation":0,
                  "type":"bush",
                  "visible":true,
                  "width":32,
                  "x":448,
                  "y":480
-                },
-            
+                }, 
                 {
                  "gid":186,
                  "height":64,
                  "id":61,
                  "name":"",
                  "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
                         {
                          "name":"yOrigin",
                          "type":"float",
@@ -359,6 +446,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
                          "value":0.8
@@ -376,6 +468,11 @@
                  "id":64,
                  "name":"",
                  "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
                         {
                          "name":"yOrigin",
                          "type":"float",
@@ -395,6 +492,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
                          "value":0.8
@@ -412,6 +514,11 @@
                  "id":69,
                  "name":"",
                  "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
                         {
                          "name":"yOrigin",
                          "type":"float",
@@ -431,6 +538,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
                          "value":0.8
@@ -449,6 +561,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
                          "value":0.8
@@ -466,6 +583,11 @@
                  "id":72,
                  "name":"",
                  "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
                         {
                          "name":"yOrigin",
                          "type":"float",
@@ -927,8 +1049,7 @@
                          "type":"bool",
                          "value":true
                         }]
-                },
-            
+                }, 
                 {
                  "id":87,
                  "objectgroup":
@@ -1159,6 +1280,12 @@
                  "image":"resources\/bush.png",
                  "imageheight":32,
                  "imagewidth":32,
+                 "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"berry\", \"count\":2}]"
+                        }],
                  "type":"bush"
                 }, 
                 {
@@ -1168,9 +1295,14 @@
                  "imagewidth":32,
                  "properties":[
                         {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"stone\", \"count\":2}]"
+                        }, 
+                        {
                          "name":"yOrigin",
                          "type":"float",
-                         "value":0.6
+                         "value":-2.4
                         }],
                  "type":"stone"
                 }, 
@@ -1180,6 +1312,11 @@
                  "imageheight":64,
                  "imagewidth":32,
                  "properties":[
+                        {
+                         "name":"drops",
+                         "type":"string",
+                         "value":"[{\"type\":\"log\", \"count\":3}]"
+                        }, 
                         {
                          "name":"yOrigin",
                          "type":"float",
@@ -1192,5 +1329,5 @@
  "tilewidth":32,
  "type":"map",
  "version":"1.8",
- "width":16
+ "width":0
 }

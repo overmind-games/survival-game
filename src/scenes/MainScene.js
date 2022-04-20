@@ -8,6 +8,7 @@ import ResourceObject from "../map/ResourceObject";
 import EnterRegion from "../behavior/EnterRegion";
 import Phaser from "phaser";
 import _ from "underscore";
+import DropItem from "../sprites/DropItem";
 
 export default class MainScene extends BaseScene {
 
@@ -20,6 +21,7 @@ export default class MainScene extends BaseScene {
         this.load.image('tiles', tilesetUrl);
         Player.load(this);
         Resource.load(this);
+        DropItem.load(this);
     }
 
     create({spawnName = 'spawn'}) {
