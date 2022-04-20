@@ -115,7 +115,7 @@ export default class MainScene extends BaseScene {
             objectA: this.player.collider,
             objectB: drops,
             callback: event => {
-                event.gameObjectB.destroy()
+                event.gameObjectB.pickup();
             }
         })
     }

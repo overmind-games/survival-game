@@ -40,5 +40,6 @@ export default class DropItem extends Phaser.Physics.Matter.Sprite {
 
     pickup() {
         this.pickupSound.play();
+        this.destroy();
     }
 }
