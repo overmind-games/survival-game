@@ -104,8 +104,20 @@ export default class MainScene extends BaseScene {
             return;
         }
 
-        const closest = _.min(this.touching.children.entries, resource => Phaser.Math.Distance.BetweenPoints(this.player, resource));
+        const closest = _.min(this.touching.getChildren(), resource => Phaser.Math.Distance.BetweenPoints(this.player, resource));
         closest.hit();
+    }
+
+    addDrops(type, count, x, y) {
+        const drops = Array.from({length:count}, i => new DropItem(this, type, x, y));
+
+        this.matterCollision.addOnCollideStart({
+            objectA: this.player.collider,
+            objectB: drops,
+            callback: event => {
+                event.gameObjectB.destroy()
+            }
+        })
     }
 
     update(time, delta) {

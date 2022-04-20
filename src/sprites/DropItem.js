@@ -7,7 +7,7 @@ const textures = {
     'berry': 228
 }
 
-export default class DropItem extends Phaser.Physics.Matter.Sprite { //TODO make it pickable
+export default class DropItem extends Phaser.Physics.Matter.Sprite {
 
     static load(scene) {
         scene.load.spritesheet('items', itemsUrl,{
