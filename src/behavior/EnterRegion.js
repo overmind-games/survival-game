@@ -31,12 +31,13 @@ export default class EnterRegion {
             objectB: this.exit,
             callback: () => this.leaveExit()
         });
+
+        this.key = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     comeToExit() {
         this.player.showBalloon();
-        this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
-            .on('down', this.onExit, this);
+        this.key.once('down', this.onExit, this);
     }
 
     onExit() {
@@ -53,6 +54,6 @@ export default class EnterRegion {
 
     leaveExit() {
         this.player.hideBalloon();
-        this.scene.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.key.off('down', this.onExit, this);
     }
 }
